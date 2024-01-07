@@ -1,0 +1,4379 @@
+{
+  "pairs": 
+  [
+    {
+      "state": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 0,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 0,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 0,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 1,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 1,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 1,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 1,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 2,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -937499.4375
+          },
+          {
+            "action": "moveRight",
+            "value": -499999.75
+          },
+          {
+            "action": "moveFront",
+            "value": -937498.375
+          },
+          {
+            "action": "moveBack",
+            "value": -749998.4375
+          },
+          {
+            "action": "ascend",
+            "value": 2.6899971961975099
+          },
+          {
+            "action": "descend",
+            "value": -499999.75
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 2,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 2,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 2,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 2,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 3,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -937497.5625
+          },
+          {
+            "action": "moveRight",
+            "value": -984372.125
+          },
+          {
+            "action": "moveFront",
+            "value": -0.007499999832361937
+          },
+          {
+            "action": "moveBack",
+            "value": -937498.1875
+          },
+          {
+            "action": "ascend",
+            "value": 2.999997138977051
+          },
+          {
+            "action": "descend",
+            "value": 1.2054986953735352
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 3,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -499999.75
+          },
+          {
+            "action": "moveRight",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "moveFront",
+            "value": -499999.75
+          },
+          {
+            "action": "moveBack",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "ascend",
+            "value": 1.4998952150344849
+          },
+          {
+            "action": "descend",
+            "value": -499999.75
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 3,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 3,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -499999.75
+          },
+          {
+            "action": "moveRight",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 3,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 4,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -999752.625
+          },
+          {
+            "action": "moveRight",
+            "value": 2.999997138977051
+          },
+          {
+            "action": "moveFront",
+            "value": 2.99979305267334
+          },
+          {
+            "action": "moveBack",
+            "value": -999752.625
+          },
+          {
+            "action": "ascend",
+            "value": -999935.75
+          },
+          {
+            "action": "descend",
+            "value": 2.6893184185028078
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 4,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -499999.75
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": -499998.40625
+          },
+          {
+            "action": "moveBack",
+            "value": 2.999997138977051
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 4,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 4,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 0,
+        "y": 4,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 0,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 0,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 0,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 0,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 1,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 1,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 1,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 1,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 2,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 2,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 2,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 2,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 2,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 3,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 3,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "moveRight",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 3,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -499999.75
+          },
+          {
+            "action": "moveRight",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 3,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 3,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 4,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 2.999997138977051
+          },
+          {
+            "action": "moveRight",
+            "value": 2.9993908405303957
+          },
+          {
+            "action": "moveFront",
+            "value": 2.944124221801758
+          },
+          {
+            "action": "moveBack",
+            "value": -999752.625
+          },
+          {
+            "action": "ascend",
+            "value": -999989.125
+          },
+          {
+            "action": "descend",
+            "value": -999752.625
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 4,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 2.9916443824768068
+          },
+          {
+            "action": "moveRight",
+            "value": 0.15000000596046449
+          },
+          {
+            "action": "moveFront",
+            "value": 0.15000000596046449
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 4,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -499999.75
+          },
+          {
+            "action": "moveRight",
+            "value": 1.2061786651611329
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 4,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 1,
+        "y": 4,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 0,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 0,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 0,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 0,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 0,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 1,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 1,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 1,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 1,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 2,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 2,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 2,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 2,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 2,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 3,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -499999.75
+          },
+          {
+            "action": "moveRight",
+            "value": -499999.75
+          },
+          {
+            "action": "moveFront",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 3,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "moveRight",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "moveFront",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 3,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "moveRight",
+            "value": -499999.75
+          },
+          {
+            "action": "moveFront",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 3,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 3,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 4,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 2.999933958053589
+          },
+          {
+            "action": "moveRight",
+            "value": -499998.40625
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": -0.004999999888241291
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 4,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.7905861139297485
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 4,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 1.1450361013412476
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.15000000596046449
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": -499999.5
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 4,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.15000000596046449
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 2,
+        "y": 4,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 0,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 0,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 0,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 0,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 0,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 1,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 1,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 1,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 1,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 2,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 2,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 2,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 2,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 2,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 3,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 3,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": -0.004999999888241291
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 3,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 3,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 3,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 4,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 4,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 4,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 4,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 3,
+        "y": 4,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 0,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 0,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 0,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 0,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 0,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 1,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 1,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 1,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 1,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 1,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 2,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 2,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 2,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 2,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 2,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 3,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 3,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 3,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 3,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 3,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 4,
+        "z": 0
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 4,
+        "z": 1
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 4,
+        "z": 2
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 4,
+        "z": 3
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "state": {
+        "x": 4,
+        "y": 4,
+        "z": 4
+      },
+      "actions": {
+        "actionValues": [
+          {
+            "action": "moveLeft",
+            "value": 0.0
+          },
+          {
+            "action": "moveRight",
+            "value": 0.0
+          },
+          {
+            "action": "moveFront",
+            "value": 0.0
+          },
+          {
+            "action": "moveBack",
+            "value": 0.0
+          },
+          {
+            "action": "ascend",
+            "value": 0.0
+          },
+          {
+            "action": "descend",
+            "value": 0.0
+          }
+        ]
+      }
+    }
+  ]}
