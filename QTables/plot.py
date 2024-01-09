@@ -22,17 +22,27 @@ episode_numbers = [data['episodeNumber'] for data in episode_data]
 destination_reached = [data['destinationReached'] for data in episode_data]
 distance_covered = [data['distanceCovered'] for data in episode_data]
 epsilon_values = [data['epsilon'] for data in episode_data]
+total_rewards = [data['totalReward'] for data in episode_data]
+impossible_moves = [data['impossibleMoves'] for data in episode_data]
+unwanted_moves = [data['unwantedMoves'] for data in episode_data]
+exploration_amounts = [data['exploration'] for data in episode_data]
+exploitation_amounts = [data['exploitation'] for data in episode_data]
+
+# Calculate Total Reward per Distance Covered
+reward_per_distance = [total_rewards[i]/distance_covered[i] if distance_covered[i] != 0 else 0 for i in range(len(total_rewards))]
 
 # Plotting
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(15, 9))
 
-plt.subplot(2, 2, 1)
+# Plot 1: Destination Reached per Episode
+plt.subplot(3, 2, 1)
 plt.plot(episode_numbers, destination_reached, marker='o')
 plt.title("Destination Reached per Episode")
 plt.xlabel("Episode Number")
 plt.ylabel("Destination Reached")
 
-plt.subplot(2, 2, 2)
+# Plot 2: Distance Covered and Scalar Distance per Episode
+plt.subplot(3, 2, 2)
 plt.plot(episode_numbers, distance_covered, marker='o', label='Distance Covered')
 plt.axhline(y=distance, color='r', linestyle='-', label='Scalar Distance = {}'.format(round(distance,2)))
 plt.title("Distance Covered and Scalar Distance per Episode")
@@ -40,18 +50,38 @@ plt.xlabel("Episode Number")
 plt.ylabel("Distance")
 plt.legend()
 
-plt.subplot(2, 2, 3)
+# Plot 3: Epsilon Value per Episode
+plt.subplot(3, 2, 3)
 plt.plot(episode_numbers, epsilon_values, marker='o')
 plt.title("Epsilon Value per Episode")
 plt.xlabel("Episode Number")
 plt.ylabel("Epsilon Value")
 
-plt.subplot(2, 2, 4)
-plt.axhline(y=distance, color='r', linestyle='-')
-plt.title("Scalar Distance from InitialPosition to Destination")
+# Plot 4: Exploration and Exploitation Amounts per Episode
+
+plt.subplot(3, 2, 4)
+plt.plot(episode_numbers, exploration_amounts, marker='o', label='Exploration')
+plt.plot(episode_numbers, exploitation_amounts, marker='x', label='Exploitation')
+plt.title("Exploration and Exploitation per Episode")
 plt.xlabel("Episode Number")
-plt.ylabel("Scalar Distance")
-plt.ylim(0, distance + 1)  # Adjust y-axis to show the line clearly
+plt.ylabel("Amount")
+plt.legend()
+
+# Plot 5: Total Reward per Distance Covered per Episode
+plt.subplot(3, 2, 5)
+plt.plot(episode_numbers, reward_per_distance, marker='o', color='green')
+plt.title("Total Reward per Distance Covered per Episode")
+plt.xlabel("Episode Number")
+plt.ylabel("Reward per Distance")
+
+# Plot 6: Number of Impossible and Unwanted Moves per Episode
+plt.subplot(3, 2, 6)
+plt.plot(episode_numbers, impossible_moves, marker='o', label='Impossible Moves')
+plt.plot(episode_numbers, unwanted_moves, marker='x', label='Unwanted Moves')
+plt.title("Impossible and Unwanted Moves per Episode")
+plt.xlabel("Episode Number")
+plt.ylabel("Number of Moves")
+plt.legend()
 
 plt.tight_layout()
 plt.show()

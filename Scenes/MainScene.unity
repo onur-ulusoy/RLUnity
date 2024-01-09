@@ -6643,9 +6643,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simController: {fileID: 1355416146}
-  epsilon: 0.2
+  epsilon: 0.1
   alpha: 0.5
   gamma: 0.9
+  initialGamma: 0
   maxMovesPerEpisode: 25
   gridSize: {x: 0, y: 0, z: 0}
   initialPosition: {x: 0, y: 0, z: 0}
@@ -6653,7 +6654,7 @@ MonoBehaviour:
   loadTable: 0
   currentState: {x: 0, y: 0, z: 0}
   totalEpisodes: 900
-  minEpsilon: 0.05
+  minEpsilon: 0
   epsilonDecayRate: 0.985
   resetFlag: 0
 --- !u!4 &1599495037

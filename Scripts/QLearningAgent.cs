@@ -12,6 +12,7 @@ public class QLearningAgent : MonoBehaviour
     private float initialEpsilon;
     public float alpha = 0.5f;
     public float gamma = 0.9f;
+    public float initialGamma;
     public int maxMovesPerEpisode = 50;
     public Vector3Int gridSize;
     public Vector3Int initialPosition;
@@ -19,6 +20,13 @@ public class QLearningAgent : MonoBehaviour
     public bool loadTable = false;
     bool destinationReached = false;
     int distanceCovered = 0;
+
+    // For each episode
+    float totalReward = 0;
+    InvalidMoves invalidMoves;
+    int exploration;
+    int exploitation;
+
     public bool SetVariables(List<Vector3Int> varStack)
     {
         // Check if varStack has enough elements
@@ -51,6 +59,11 @@ public class QLearningAgent : MonoBehaviour
 
         currentState = initialPosition;
         currentMoves = 0;
+        initialGamma = gamma;
+        invalidMoves = new InvalidMoves();
+        invalidMoves.Reset();
+        exploration = 0;
+        exploitation = 0;
     }
 
     void InitializeQTable()
@@ -78,11 +91,13 @@ public class QLearningAgent : MonoBehaviour
         if (Random.Range(0f, 1f) < epsilon)
         {
             // Explore
+            exploration++;
             return actions[Random.Range(0, actions.Length)];
         }
         else
         {
             // Exploit best known action
+            exploitation++;
             string bestAction = null;
             float maxQValue = float.MinValue;
             foreach (var action in actions)
@@ -187,8 +202,9 @@ public class QLearningAgent : MonoBehaviour
             HandleFailedMove(currentState, direction);
         }
 
-        float reward = GetReward(newState);
+        //print(currentState.ToString() + newState.ToString());
 
+        float reward = GetReward(newState);
         Learn(currentState, action, reward, newState);
         currentState = newState;
         currentMoves++;
@@ -211,39 +227,86 @@ public class QLearningAgent : MonoBehaviour
         }
         return false; // Indicate that the training is ongoing
     }
+
+    private Queue<Vector3Int> stateHistory = new Queue<Vector3Int>();
+    private int stateHistoryLength = 6; // Length of the history buffer
     float GetReward(Vector3Int state)
     {
+        gamma = initialGamma;
+        float reward = 0;
+
+        // Check if the state is in the history buffer
+        if (stateHistory.Contains(state))
+        {
+            reward += -2.0f; // Penalty for revisiting a recent state
+        }
+
+        // Update state history
+        stateHistory.Enqueue(state);
+        if (stateHistory.Count > stateHistoryLength)
+        {
+            stateHistory.Dequeue();
+        }
+
+        if (currentState.x == initialPosition.x && currentState.z == initialPosition.z
+            && (state.x != initialPosition.x || state.z != initialPosition.z))
+        {
+            //print("reward"+ currentState.ToString() + state.ToString());
+            reward += -0.75f;
+            invalidMoves.unwantedMoves += 1;
+        }
+
         // Reward for reaching the destination
         if (state == destination)
         {
-            return 1f;
+            reward += 0.2f;
         }
 
         // Penalize for not moving due to obstructions
         if (state == currentState)
         {
-            return -0.5f;
+            reward += -0.5f;
+            invalidMoves.impossibleMoves += 1;
         }
 
-        // Reward for ascending towards the highest plane while aligning with the destination's x and z coordinates
-        if (state.y > currentState.y && state.x == destination.x && state.z == destination.z)
+        // Reward for ascending towards the highest plane while aligning with the initial state's x and z coordinates
+        if (state.y > currentState.y && state.x == initialPosition.x && state.z == initialPosition.z)
         {
-            return 0.5f;
+            //print("reward"+ currentState.ToString() + state.ToString());
+            reward += 1.25f;
         }
-
-/*        // Reward for moving in the highest plane (y == gridSize.y - 1)
-        if (state.y == gridSize.y - 1)
+        else if (state.x == initialPosition.x && state.z == initialPosition.z)
         {
-            return 0.3f;
-        }*/
-
-
-        return -0.01f;
+            invalidMoves.unwantedMoves += 1;
         }
+
+        if (state.y < currentState.y && !(state.x == destination.x && state.z == destination.z))
+        {
+            //print("reward"+ currentState.ToString() + state.ToString());
+            gamma = 0;
+            reward += -2.25f;
+            invalidMoves.unwantedMoves += 1;
+        }
+
+
+
+
+        /*        // Reward for moving in the highest plane (y == gridSize.y - 1)
+                if (state.y == gridSize.y - 1)
+                {
+                    return 0.3f;
+                }*/
+
+        reward += -0.05f;
+        totalReward += reward;
+        return reward;
+
     }
 
-
-
+    public void ResetStateHistory()
+    {
+        stateHistory.Clear();
+    }
 
     public int totalEpisodes = 900;
     private int currentEpisode = 0;
@@ -276,10 +339,7 @@ public class QLearningAgent : MonoBehaviour
             if (episodeCompleted)
             {
                 //Debug.Log("Episode: " + currentEpisode);
-
-                currentEpisode++;
-                epsilon = Mathf.Max(minEpsilon, epsilon * epsilonDecayRate);
-
+                StartNewEpisode();
 
                 if (currentEpisode >= totalEpisodes)
                 {
@@ -294,6 +354,19 @@ public class QLearningAgent : MonoBehaviour
             // Update the Unity scene here (e.g., move game objects, update UI, etc.)
         }
     }
+
+    void StartNewEpisode()
+    {
+        // Reset the state history at the beginning of the episode
+        ResetStateHistory();
+        invalidMoves.Reset();
+        totalReward = 0;
+        exploration = 0;
+        exploitation = 0;
+        currentEpisode++;
+        epsilon = Mathf.Max(minEpsilon, epsilon * epsilonDecayRate);
+    }
+
 
     [SerializeField]
     bool resetFlag = false;
@@ -311,7 +384,7 @@ public class QLearningAgent : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         simController.ResetPosition(); // Reset the agent's position for the next episode
-        
+
         currentMoves = 0; // Reset the move counter
         currentState = initialPosition;
         ToggleFlag(ref resetFlag);
@@ -345,21 +418,6 @@ public class QLearningAgent : MonoBehaviour
         qTable = QTableUtils.LoadQTable(qTablePath);
     }
 
-    [System.Serializable]
-    public class SessionData
-    {
-        public float initialEpsilon;
-        public float alpha;
-        public float gamma;
-        public int maxMovesPerEpisode;
-        public Vector3Int gridSize;
-        public Vector3Int initialPosition;
-        public Vector3Int destination;
-        public bool loadTable;
-        public float minEpsilon;
-        public float epsilonDecayRate;
-    }
-
     public void SaveSessionData(string filePath)
     {
         SessionData data = new SessionData
@@ -379,16 +437,6 @@ public class QLearningAgent : MonoBehaviour
         string json = JsonUtility.ToJson(data);
         // Serialize the data with indentation
         File.WriteAllText(filePath, json);
-    }
-
-    [System.Serializable]
-    public class EpisodeData
-    {
-        public int episodeNumber;
-        public bool destinationReached;
-        public int distanceCovered;
-        //public int stepsTaken;
-        public float epsilon;
     }
 
     // Method to save episode data
@@ -413,9 +461,15 @@ public class QLearningAgent : MonoBehaviour
             destinationReached = this.destinationReached/* true or false */,
             distanceCovered = this.distanceCovered /* calculate distance covered */,
             //stepsTaken = this.stepsTaken/* steps taken in the episode */,
-            epsilon = this.epsilon
-        };
+            epsilon = this.epsilon,
+            totalReward = this.totalReward,
+            impossibleMoves = this.invalidMoves.impossibleMoves,
+            unwantedMoves = this.invalidMoves.unwantedMoves,
+            exploration = this.exploration,
+            exploitation = this.exploitation
 
+        };
+        
         SaveEpisodeData(epFilePath, data);
     }
 
@@ -439,8 +493,62 @@ public class QLearningAgent : MonoBehaviour
         // Overwrite the file with an empty string
         File.WriteAllText(filePath, string.Empty);
     }
-
 }
+
+    [System.Serializable]
+    public class SessionData
+    {
+        public float initialEpsilon;
+        public float alpha;
+        public float gamma;
+        public int maxMovesPerEpisode;
+        public Vector3Int gridSize;
+        public Vector3Int initialPosition;
+        public Vector3Int destination;
+        public bool loadTable;
+        public float minEpsilon;
+        public float epsilonDecayRate;
+    }
+
+    
+
+    [System.Serializable]
+    public class EpisodeData
+    {
+        public int episodeNumber;
+        public bool destinationReached;
+        public int distanceCovered;
+        //public int stepsTaken;
+        public float epsilon;
+        public float totalReward;
+        public float impossibleMoves;
+        public float unwantedMoves;
+        public int exploration;
+        public int exploitation;
+}
+
+    public class InvalidMoves
+    {
+        // Attribute for moves that are physically impossible or invalid
+        public float impossibleMoves;
+
+        // Attribute for moves that are possible but not desired according to the strategy
+        public float unwantedMoves;
+
+        // Method to reset all attributes to zero
+        public void Reset()
+        {
+            impossibleMoves = 0.0f;
+            unwantedMoves = 0.0f;
+        }
+}
+
+
+
+
+
+
+
 
 
 
