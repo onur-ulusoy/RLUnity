@@ -5399,7 +5399,7 @@ GameObject:
   - component: {fileID: 1355416146}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: gc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5421,6 +5421,7 @@ MonoBehaviour:
   tolerance: 0.05
   structureSize: {x: 5, y: 5, z: 5}
   emptyProbability: 4
+  cubesParent: {fileID: 0}
   animationDuration: 0
   material1: {fileID: 2100000, guid: ccdf908219c056e47b7042e940f76eea, type: 2}
   material2: {fileID: 2100000, guid: 10c4c6fcb8c88ae4cb8be8d879a7f8dc, type: 2}
@@ -6613,65 +6614,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1585028558}
   m_CullTransparentMesh: 1
---- !u!1 &1599495035
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1599495037}
-  - component: {fileID: 1599495036}
-  m_Layer: 0
-  m_Name: QLearningAgent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1599495036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1599495035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b77fa72ea05505547b009dfd4cfc7d0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  simController: {fileID: 1355416146}
-  epsilon: 0.1
-  alpha: 0.5
-  gamma: 0.9
-  initialGamma: 0
-  maxMovesPerEpisode: 25
-  gridSize: {x: 0, y: 0, z: 0}
-  initialPosition: {x: 0, y: 0, z: 0}
-  destination: {x: 0, y: 0, z: 0}
-  loadTable: 0
-  currentState: {x: 0, y: 0, z: 0}
-  totalEpisodes: 900
-  minEpsilon: 0
-  epsilonDecayRate: 0.985
-  resetFlag: 0
---- !u!4 &1599495037
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1599495035}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5501999, y: 2.2626815, z: 1.0539408}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1625243113
 GameObject:
   m_ObjectHideFlags: 0
@@ -6952,6 +6894,7 @@ GameObject:
   - component: {fileID: 1638814652}
   - component: {fileID: 1638814651}
   - component: {fileID: 1638814650}
+  - component: {fileID: 1638814653}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -7023,9 +6966,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1599495036}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: QLearningAgent, Assembly-CSharp
-        m_MethodName: SaveQTable
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7073,6 +7016,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1638814648}
   m_CullTransparentMesh: 1
+--- !u!114 &1638814653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638814648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e668b24e1af38145b74224331368037, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  learningAgent: {fileID: 0}
 --- !u!1 &1654085607
 GameObject:
   m_ObjectHideFlags: 0
@@ -8019,9 +7975,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1355416146}
-        m_TargetAssemblyTypeName: SimController, Assembly-CSharp
-        m_MethodName: ResetPosition
+      - m_Target: {fileID: 1884695915}
+        m_TargetAssemblyTypeName: StartButton, Assembly-CSharp
+        m_MethodName: ResetGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8692,10 +8648,11 @@ MonoBehaviour:
   destinationYInput: {fileID: 1473385105}
   destinationZInput: {fileID: 752192188}
   gameController: {fileID: 1355416145}
-  QLearningAgent: {fileID: 1599495035}
+  QLearningAgent: {fileID: 0}
   learningActive: 0
-  qLA: {fileID: 1599495036}
+  qLA: {fileID: 0}
   started: 0
+  learningAgentPrefab: {fileID: 1475603028172552865, guid: e7fb2c9cc4070634ca1ee0821b60c97a, type: 3}
 --- !u!1 &1934296810
 GameObject:
   m_ObjectHideFlags: 0
@@ -9092,4 +9049,3 @@ SceneRoots:
   - {fileID: 1728676925}
   - {fileID: 685853025}
   - {fileID: 4736277}
-  - {fileID: 1599495037}

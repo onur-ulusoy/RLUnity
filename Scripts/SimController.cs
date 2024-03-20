@@ -18,6 +18,9 @@ public class SimController : MonoBehaviour
     // Snapshots of the initial states
     private Dictionary<Vector3Int, GameObject> initialPositionToCubeMap;
     private Dictionary<Vector3Int, GameObject> initialPositionToEmptyMap;
+    
+    public GameObject cubesParent;
+    public QLearningAgent qla;
 
     // Method to initialize the prismatic structure
     public void InitPrismaticStructure(int a, int b, int c)
@@ -29,7 +32,7 @@ public class SimController : MonoBehaviour
         }
 
         // Create an empty GameObject to hold all cubes
-        GameObject cubesParent = new GameObject("BoxContainer");
+        cubesParent = new GameObject("BoxContainer");
 
         // Calculate the size of the cube including tolerance
         Renderer cubeRenderer = cubePrefab.GetComponent<Renderer>();
@@ -121,12 +124,18 @@ public class SimController : MonoBehaviour
     // Method to move a cube in a specified direction
     public bool MoveCube(Vector3Int cubePosition, string direction)
     {
+        if (qla == null && GameObject.FindGameObjectWithTag("la") != null)
+            qla = GameObject.FindGameObjectWithTag("la").GetComponent<QLearningAgent>();
+
+        print(1);
         if (!positionToCubeMap.ContainsKey(cubePosition))
         {
             Debug.LogError("No cube found at the specified position.");
             print(cubePosition.ToString());
             return false;
         }
+        print(2);
+
 
         Vector3Int targetPosition = cubePosition;
         switch (direction.ToLower())
@@ -140,6 +149,7 @@ public class SimController : MonoBehaviour
 
             default: Debug.LogError("Invalid direction specified."); return false;
         }
+        print(3);
 
         if (positionToEmptyMap.ContainsKey(targetPosition))
         {
@@ -148,12 +158,157 @@ public class SimController : MonoBehaviour
 
             StartCoroutine(SlideObjects(cube, empty, cubePosition, targetPosition));
         }
+
         else
         {
             Debug.LogError("The move is not possible. The target position is not empty or out of bounds."); return false;
         }
+        print(4);
+
         return true;
     }
+    public int movect = 0;
+    //public Vector3Int pickAndMove = Vector3Int.zero;
+    public bool PickAndMoveCube(Vector3Int cubePosition)
+    {
+        // List of directions
+        string[] directions = { "left", "right", "front", "back" };
+
+        // Randomly select a direction
+        string direction = directions[Random.Range(0, directions.Length)];
+
+        // Initialize targetPosition
+        Vector3Int targetPosition = cubePosition;
+
+        // Modify targetPosition based on the selected direction
+        switch (direction.ToLower())
+        {
+            case "left": targetPosition.x -= 1; break;
+            case "right": targetPosition.x += 1; break;
+            case "front": targetPosition.z += 1; break;
+            case "back": targetPosition.z -= 1; break;
+            default: Debug.LogError("Invalid direction specified."); return false;
+        }
+
+        // Check if the target position is within the structure boundaries
+        if (targetPosition.x < 0 || targetPosition.x >= structureSize.x ||
+            targetPosition.z < 0 || targetPosition.z >= structureSize.z)
+        {
+            // If the target position is out of bounds, choose a new random direction and try again
+            return PickAndMoveCube(cubePosition);
+        }
+
+        print("from:" + cubePosition.ToString());
+        print("target:" + targetPosition.ToString());
+        print("\n");
+
+        if (qla == null && GameObject.FindGameObjectWithTag("la") != null)
+            qla = GameObject.FindGameObjectWithTag("la").GetComponent<QLearningAgent>();
+
+        qla.ClearUpperBoxes(targetPosition);
+
+        // Call the MoveCube function
+        if (!MoveCube(cubePosition, direction) && movect < 6)
+        {
+            print("pick and move");
+            // If MoveCube failed, try recursively moving the cube in the specified direction
+            movect++;
+            return PickAndMoveCube(targetPosition);
+        }
+
+        qla.stop = false;
+        print("return");
+        return true;
+    }
+
+    //public int localStop = 0;
+    Dictionary<Vector3Int, string> indexToOldBlockDirection = new Dictionary<Vector3Int, string>();
+    public bool PickAndMoveCubeAnim(Vector3Int cubePosition)
+    {
+        // List of directions
+        string[] directions = { "left", "right", "front", "back" };
+
+        // Initialize targetPosition
+        Vector3Int targetPosition;
+        string direction;
+        // Check if the target position is within the structure boundaries
+        do
+        {
+            // Randomly select a direction
+
+            // Check if cubePosition exists in indexToOldBlockDirection
+            if (indexToOldBlockDirection.ContainsKey(cubePosition))
+            {
+                foreach (var kvp in indexToOldBlockDirection)
+                {
+                    Debug.Log("Key: " + kvp.Key + ", Value: " + kvp.Value);
+                }
+
+                // Retrieve the direction associated with cubePosition
+                direction = indexToOldBlockDirection[cubePosition];
+
+                // Remove the element from the dictionary
+                indexToOldBlockDirection.Remove(cubePosition);
+
+                // Now you can use the direction variable as needed
+            }
+            else
+            direction = directions[Random.Range(0, directions.Length)];
+
+            // Initialize targetPosition with cubePosition for each iteration
+            targetPosition = cubePosition;
+
+            // Modify targetPosition based on the selected direction
+            switch (direction.ToLower())
+            {
+                case "left": targetPosition.x -= 1; break;
+                case "right": targetPosition.x += 1; break;
+                case "front": targetPosition.z += 1; break;
+                case "back": targetPosition.z -= 1; break;
+            }
+        }
+        while (targetPosition.x < 0 || targetPosition.x >= structureSize.x ||
+                 targetPosition.z < 0 || targetPosition.z >= structureSize.z ||
+                 upperBoxPoses.Contains(targetPosition));
+
+        if (RegisterUpperBoxesInner(targetPosition) || RegisterUpperBoxesInner(cubePosition))
+        {
+            indexToOldBlockDirection.Add(cubePosition, direction);
+            return false;
+        }
+        print("fromm:" + cubePosition.ToString());
+        print("targett:" + targetPosition.ToString());
+        print("\n");
+
+        if (qla == null && GameObject.FindGameObjectWithTag("la") != null)
+            qla = GameObject.FindGameObjectWithTag("la").GetComponent<QLearningAgent>();
+
+        //ClearUpperBox(targetPosition);
+
+        // Call the MoveCube function
+        if (!MoveCube(cubePosition, direction))
+        {
+            print("pick and move");
+            // If MoveCube failed, try recursively moving the cube in the specified direction
+            //movect++;
+            upperBoxPoses.Add(targetPosition);
+            indexToOldBlockDirection.Add(cubePosition, direction);
+            return false;
+            //pickAndMove = targetPosition;
+        }
+
+        else
+        {
+            //localStop++;
+            //pickAndMove = Vector3Int.zero;
+            downwardQueue.Add(targetPosition);
+            print("returns true");
+            return true;
+        }
+
+        //print("return");
+    }
+
 
     public float animationDuration = 1.0f; // Duration of the slide in seconds
 
@@ -176,16 +331,20 @@ public class SimController : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float t = elapsed / animationDuration;
-
-            cube.transform.position = Vector3.Lerp(startPositionCube, startPositionEmpty, t);
-            empty.transform.position = Vector3.Lerp(startPositionEmpty, startPositionCube, t);
+            if (cube != null && empty != null) {
+                cube.transform.position = Vector3.Lerp(startPositionCube, startPositionEmpty, t);
+                empty.transform.position = Vector3.Lerp(startPositionEmpty, startPositionCube, t);
+            }
 
             yield return null;
         }
 
-        // Ensure objects are exactly in their final positions
-        cube.transform.position = startPositionEmpty;
-        empty.transform.position = startPositionCube;
+        if (cube != null && empty != null)
+        {
+            // Ensure objects are exactly in their final positions
+            cube.transform.position = startPositionEmpty;
+            empty.transform.position = startPositionCube;
+        }
     }
 
     public Material material1; 
@@ -234,14 +393,28 @@ public class SimController : MonoBehaviour
         destinationReachedText.text = "Destination reached: " + destinationReachedCount;
     }
 
+    public void resetDestReachedText()
+    {
+        destinationReachedCount = 0;
+        destinationReachedText.text = "Destination reached: " + destinationReachedCount;
+
+    }
+
     /*public void GoToDestination(Vector3Int initialPosition, Vector3Int destination)
     {
         SwitchCubeMaterialAt(initialPosition);
     }*/
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
+        //upperBoxIndex = -1;
+        //totalUpperBoxes = 0;
+        upperBoxPoses.Clear();
+        downwardQueue.Clear();
+        indexToOldBlockDirection.Clear();
+        positionToCubeMap.Clear();
+        positionToEmptyMap.Clear();
         InitPrismaticStructure(structureSize.x, structureSize.y, structureSize.z);
     }
 
@@ -250,12 +423,164 @@ public class SimController : MonoBehaviour
         animationDuration = 1-newDuration;
     }
 
+    public List<Vector3Int> upperBoxPoses = new List<Vector3Int>();
+    public List<Vector3Int> downwardQueue = new List<Vector3Int>();
+
+    public void RegisterUpperBoxes(Vector3Int cubePosition)
+    {
+        print("inside ClearUpperBoxes");
+
+        for (int y = cubePosition.y + 1; y < structureSize.y ; y++)
+        {
+            var upperYPos = new Vector3Int(cubePosition.x, y, cubePosition.z);
+            if (positionToCubeMap.ContainsKey(upperYPos))
+            {
+                upperBoxPoses.Add(upperYPos);
+            }
+        }
+        if(upperBoxPoses.Count > 0)
+        {
+            if (qla == null && GameObject.FindGameObjectWithTag("la") != null)
+                qla = GameObject.FindGameObjectWithTag("la").GetComponent<QLearningAgent>();
+
+            qla.stop = true;
+            print("stop qlearning!");
+            qla.exit = true;
+        }
+
+        print("total upper boxes:" + upperBoxPoses.Count);
+        //upperBoxIndex = upperBoxPoses.Count - 1;
+    }
+
+    public bool RegisterUpperBoxesInner(Vector3Int cubePosition)
+    {
+        print("inside ClearUpperBoxes");
+
+        for (int y = cubePosition.y + 1; y < structureSize.y; y++)
+        {
+            var upperYPos = new Vector3Int(cubePosition.x, y, cubePosition.z);
+            if (positionToCubeMap.ContainsKey(upperYPos))
+            {
+                upperBoxPoses.Add(upperYPos);
+                return true;
+            }
+        }
+
+        return false;
+
+        //upperBoxIndex = upperBoxPoses.Count - 1;
+    }
+    //private int upperBoxIndex = -1;
+    /*    public void ClearNextUpperBox()
+        {
+            //print("any:" + upperBoxIndex);
+            int index = upperBoxPoses.Count - 1;
+            var upperYPos = upperBoxPoses[index];
+    *//*        if (positionToCubeMap.ContainsKey(upperYPos))
+            {*//*
+
+            print("trig:" + upperYPos);
+            if (qla.waitForAnim) pickAndMove = upperYPos;
+            else PickAndMoveCube(upperYPos);
+            //}
+        }*/
+    [SerializeField]
+    private float timer1 = 0f;
+
     // Update is called once per frame
     void Update()
     {
+        timer1 += Time.deltaTime;
+
+        if (timer1 >= animationDuration)
+        {
+            //print("pickandmoveAnim");
+            if (downwardQueue.Count > 0)
+            {
+                int index = downwardQueue.Count - 1;
+                bool retv = MoveCube(downwardQueue[index], "down");
+                if (!retv)
+                {
+                    downwardQueue.RemoveAt(index);
+                }
+                else
+                {
+                    // Retrieve the current Vector3Int at the specified index
+                    Vector3Int currentValue = downwardQueue[index];
+
+                    // Decrement the z value by 1
+                    Vector3Int newValue = new Vector3Int(currentValue.x, currentValue.y - 1, currentValue.z);
+
+                    // Assign the new Vector3Int to the specified index in the list
+                    downwardQueue[index] = newValue;
+                }
+            }
+            else if (upperBoxPoses.Count > 0)
+            {
+                int index = upperBoxPoses.Count - 1;
+                bool retv = PickAndMoveCubeAnim(upperBoxPoses[index]);
+
+                if (retv)
+                {
+                    upperBoxPoses.RemoveAt(index);
+                }
+
+/*                else
+                {
+                    timer1 = 1500;
+                    return;
+                }*/
+                    
+            }
+
+            else if (qla != null)
+                qla.stop = false;
+
+
+            timer1 = 0f; // Reset the timer
+            
+            
+        }
+
+        
+/*        if (pickAndMove != Vector3Int.zero)
+        {
+            timer1 += Time.deltaTime;
+
+            if (timer1 >= animationDuration)
+            {
+                print("pickandmoveAnim");
+                PickAndMoveCubeAnim(pickAndMove);
+                timer1 = 0f; // Reset the timer
+            }
+
+        }
+        if(upperBoxIndex >= 0)
+        {
+            print("upperBoxIndex:" + upperBoxIndex);
+
+            ClearUpperBox();
+            upperBoxIndex--;
+            if (upperBoxIndex == -1) upperBoxPoses.Clear();
+
+        }
+
+        if (localStop == totalUpperBoxes)
+        {
+            timer2 += Time.deltaTime;
+
+            if (timer2 >= animationDuration)
+            {
+
+                print("localstop");
+                qla.stop = false;
+                localStop = totalUpperBoxes = 0;
+                timer2 = 0f; // Reset the timer
+            }
+            
+        }*/
 
     }
 
-  
 
 }

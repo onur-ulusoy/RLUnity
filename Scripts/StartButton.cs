@@ -45,8 +45,15 @@ public class StartButton : MonoBehaviour
     public bool learningActive = false;
     public QLearningAgent qLA;
     public bool started = false;
+    public GameObject learningAgentPrefab; // Assign the prefab in the Inspector
+
     void OnButtonClick()
     {
+        // Instantiate a new learning agent from the prefab at the same position and rotation
+        started = false;
+        QLearningAgent = Instantiate(learningAgentPrefab, Vector3.zero, Quaternion.identity);
+        qLA = QLearningAgent.GetComponent<QLearningAgent>();
+
         if (simController == null)
         {
             Debug.LogError("SimController component is not found on the GameController object.");
@@ -72,10 +79,44 @@ public class StartButton : MonoBehaviour
                 Debug.LogError("Invalid input for coordinates.");
             }
         }
-        
 
-        learningActive = !learningActive;
+
+        //learningActive = !learningActive;
+        learningActive = true;
         QLearningAgent.SetActive(learningActive);
+    }
+
+    public void ResetGame()
+    {
+
+        if (QLearningAgent != null)
+        {
+            // Destroy the existing object
+            Destroy(QLearningAgent);
+
+
+            if (simController.cubesParent != null)
+            {
+                Destroy(simController.cubesParent);
+            }
+
+            // Call Start method on the new learning agent
+            simController.resetDestReachedText();
+            simController.Start();
+        }
+        else
+        {
+            //Debug.LogWarning("Learning agent object not found.");
+
+            if (simController.cubesParent != null)
+            {
+                Destroy(simController.cubesParent);
+            }
+
+            // Call Start method on the new learning agent
+            simController.resetDestReachedText();
+            simController.Start();
+        }
     }
 
     private bool TryParseVector3Int(TMP_InputField xField, TMP_InputField yField, TMP_InputField zField, out Vector3Int result)

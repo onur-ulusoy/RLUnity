@@ -12,7 +12,6 @@ public class QLearningAgent : MonoBehaviour
     private float initialEpsilon;
     public float alpha = 0.5f;
     public float gamma = 0.9f;
-    public float initialGamma;
     public int maxMovesPerEpisode = 50;
     public Vector3Int gridSize;
     public Vector3Int initialPosition;
@@ -48,6 +47,7 @@ public class QLearningAgent : MonoBehaviour
     private int currentMoves;
     void Start()
     {
+        simController = GameObject.FindGameObjectWithTag("gc").GetComponent<SimController>();
         ClearEpisodeDataFile();
 
         initialEpsilon = epsilon;
@@ -59,7 +59,6 @@ public class QLearningAgent : MonoBehaviour
 
         currentState = initialPosition;
         currentMoves = 0;
-        initialGamma = gamma;
         invalidMoves = new InvalidMoves();
         invalidMoves.Reset();
         exploration = 0;
@@ -179,12 +178,28 @@ public class QLearningAgent : MonoBehaviour
     }
 
     bool destReachedFlag = false;
+    public bool exit = false;
+
     public bool TrainStep()
     {
+        print("before TrainStep");
+
         distanceCovered++;
         string action = ChooseAction(currentState);
         string direction = ConvertActionToDirection(action);
+        print("before ClearUpperBoxes");
+        ClearUpperBoxes(currentState);
+        print("after ClearUpperBoxes");
 
+        if (exit)
+        {
+            print("exit");
+            exit = false;
+            //currentEpisode -= 1;
+            return false;
+        }
+        
+        //stop = false;
         // Attempt to move the cube
         bool moveSuccessful = simController.MoveCube(currentState, direction);
 
@@ -227,34 +242,23 @@ public class QLearningAgent : MonoBehaviour
         }
         return false; // Indicate that the training is ongoing
     }
+    public bool waitForAnim = true;
+    public void ClearUpperBoxes(Vector3Int cubePosition)
+    {
+        simController.RegisterUpperBoxes(cubePosition);
+        print("registered");
+    }
+
 
     private Queue<Vector3Int> stateHistory = new Queue<Vector3Int>();
-    private int stateHistoryLength = 6; // Length of the history buffer
+    private int stateHistoryLength = 8; // Length of the history buffer
     float GetReward(Vector3Int state)
     {
-        gamma = initialGamma;
+        //gamma = initialGamma;
         float reward = 0;
 
-        // Check if the state is in the history buffer
-        if (stateHistory.Contains(state))
-        {
-            reward += -2.0f; // Penalty for revisiting a recent state
-        }
-
-        // Update state history
-        stateHistory.Enqueue(state);
-        if (stateHistory.Count > stateHistoryLength)
-        {
-            stateHistory.Dequeue();
-        }
-
-        if (currentState.x == initialPosition.x && currentState.z == initialPosition.z
-            && (state.x != initialPosition.x || state.z != initialPosition.z))
-        {
-            //print("reward"+ currentState.ToString() + state.ToString());
-            reward += -0.75f;
-            invalidMoves.unwantedMoves += 1;
-        }
+        // Penalize in each step
+        reward += -0.22f;
 
         // Reward for reaching the destination
         if (state == destination)
@@ -273,32 +277,50 @@ public class QLearningAgent : MonoBehaviour
         if (state.y > currentState.y && state.x == initialPosition.x && state.z == initialPosition.z)
         {
             //print("reward"+ currentState.ToString() + state.ToString());
-            reward += 1.25f;
+            reward += 1.75f;
         }
+
         else if (state.x == initialPosition.x && state.z == initialPosition.z)
         {
             invalidMoves.unwantedMoves += 1;
         }
+        // **********************************************************************************
 
+
+        // Penalty for descending downwards without reaching the destination's x and z coordinates
         if (state.y < currentState.y && !(state.x == destination.x && state.z == destination.z))
         {
             //print("reward"+ currentState.ToString() + state.ToString());
-            gamma = 0;
             reward += -2.25f;
             invalidMoves.unwantedMoves += 1;
         }
 
 
+        // Penalize if the state is in the history buffer
+        if (stateHistory.Contains(state))
+        {
+            reward += -2.0f; // Penalty for revisiting a recent state
+        }
+
+        // Update state history
+        stateHistory.Enqueue(state);
+        if (stateHistory.Count > stateHistoryLength)
+        {
+            stateHistory.Dequeue();
+        }
+
+        // Penalize downward movement when the agent reaches the target column
+        if (currentState.x == initialPosition.x && currentState.z == initialPosition.z
+           && (state.x != initialPosition.x || state.z != initialPosition.z))
+        {
+            //print("reward"+ currentState.ToString() + state.ToString());
+            reward += -0.75f;
+            invalidMoves.unwantedMoves += 1;
+        }
 
 
-        /*        // Reward for moving in the highest plane (y == gridSize.y - 1)
-                if (state.y == gridSize.y - 1)
-                {
-                    return 0.3f;
-                }*/
 
-        reward += -0.05f;
-        totalReward += reward;
+       totalReward += reward;
         return reward;
 
     }
@@ -316,12 +338,14 @@ public class QLearningAgent : MonoBehaviour
     public float minEpsilon = 0.05f;
     public float epsilonDecayRate = 0.995f;
 
+    public bool stop = false;
+
     // Update is called once per frame
     private void Update()
     {
         timer += Time.deltaTime;
 
-        if (timer >= simController.animationDuration)
+        if (!stop && timer >= simController.animationDuration)
         {
             if (!resetFlag)
                 GoToDestination();
@@ -334,6 +358,7 @@ public class QLearningAgent : MonoBehaviour
         if (currentEpisode < totalEpisodes)
         {
             Debug.Log("Episode: " + currentEpisode);
+            simController.movect = 0;
 
             bool episodeCompleted = TrainStep();
             if (episodeCompleted)

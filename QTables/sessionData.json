@@ -1,1 +1,1 @@
-{"initialEpsilon":0.10000000149011612,"alpha":0.5,"gamma":0.8999999761581421,"maxMovesPerEpisode":25,"gridSize":{"x":5,"y":5,"z":5},"initialPosition":{"x":0,"y":0,"z":2},"destination":{"x":0,"y":1,"z":1},"loadTable":false,"minEpsilon":0.019999999552965165,"epsilonDecayRate":0.9850000143051148}
+{"initialEpsilon":0.10000000149011612,"alpha":0.5,"gamma":0.8999999761581421,"maxMovesPerEpisode":25,"gridSize":{"x":5,"y":5,"z":5},"initialPosition":{"x":0,"y":1,"z":3},"destination":{"x":0,"y":2,"z":0},"loadTable":false,"minEpsilon":0.0,"epsilonDecayRate":0.9850000143051148}
