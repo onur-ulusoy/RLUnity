@@ -7,6 +7,7 @@ public class QLearningAgent : MonoBehaviour
 {
     private string[] actions = {"moveLeft", "moveRight", "moveFront", "moveBack", "ascend", "descend"};
     private Dictionary<Vector3Int, Dictionary<string, float>> qTable;
+    public List<QTree> qTreeList;
     public SimController simController; // Reference to the SimController script
     public float epsilon = 0.1f;
     private float initialEpsilon;
@@ -56,6 +57,8 @@ public class QLearningAgent : MonoBehaviour
             LoadQTable();
         else
             InitializeQTable();
+
+        qTreeList = new List<QTree>();
 
         currentState = initialPosition;
         currentMoves = 0;
@@ -427,6 +430,8 @@ public class QLearningAgent : MonoBehaviour
         flag = !flag;
     }
 
+    //public string treePath = Application.dataPath + "/QTables/trees";
+
     readonly string qTablePath = Application.dataPath + "/QTables/table.json";
 
     public void SaveQTable()
@@ -520,60 +525,208 @@ public class QLearningAgent : MonoBehaviour
     }
 }
 
-    [System.Serializable]
-    public class SessionData
+[System.Serializable]
+public class SessionData
+{
+    public float initialEpsilon;
+    public float alpha;
+    public float gamma;
+    public int maxMovesPerEpisode;
+    public Vector3Int gridSize;
+    public Vector3Int initialPosition;
+    public Vector3Int destination;
+    public bool loadTable;
+    public float minEpsilon;
+    public float epsilonDecayRate;
+}
+
+[System.Serializable]
+public class EpisodeData
+{
+    public int episodeNumber;
+    public bool destinationReached;
+    public int distanceCovered;
+    //public int stepsTaken;
+    public float epsilon;
+    public float totalReward;
+    public float impossibleMoves;
+    public float unwantedMoves;
+    public int exploration;
+    public int exploitation;
+}
+
+public class InvalidMoves
+{
+    // Attribute for moves that are physically impossible or invalid
+    public float impossibleMoves;
+
+    // Attribute for moves that are possible but not desired according to the strategy
+    public float unwantedMoves;
+
+    // Method to reset all attributes to zero
+    public void Reset()
     {
-        public float initialEpsilon;
-        public float alpha;
-        public float gamma;
-        public int maxMovesPerEpisode;
-        public Vector3Int gridSize;
-        public Vector3Int initialPosition;
-        public Vector3Int destination;
-        public bool loadTable;
-        public float minEpsilon;
-        public float epsilonDecayRate;
+        impossibleMoves = 0.0f;
+        unwantedMoves = 0.0f;
+    }
+}
+
+
+[System.Serializable]
+public class QTreeNode
+{
+    public Vector3Int State { get; set; }
+    public float QValue { get; set; }
+    public List<QTreeNode> Children { get; set; }
+    public QTreeNode Parent = null;
+
+    public float alpha = 0.5f;
+    public float gamma = 0.9f;
+    public QTreeNode(Vector3Int state)
+    {
+        State = state;
+        QValue = 0;
+        Children = new List<QTreeNode>();
     }
 
-    
-
-    [System.Serializable]
-    public class EpisodeData
+    public void AddChild(QTreeNode child)
     {
-        public int episodeNumber;
-        public bool destinationReached;
-        public int distanceCovered;
-        //public int stepsTaken;
-        public float epsilon;
-        public float totalReward;
-        public float impossibleMoves;
-        public float unwantedMoves;
-        public int exploration;
-        public int exploitation;
-}
+        Children.Add(child);
+    }
 
-    public class InvalidMoves
+    void Learn(float reward)
     {
-        // Attribute for moves that are physically impossible or invalid
-        public float impossibleMoves;
+        /*        float maxNewQValue = float.MinValue;
+                foreach (var newAction in actions)
+                {
+                    maxNewQValue = Mathf.Max(maxNewQValue, qTable[newState][newAction]);
+                }*/
+        QValue = (1 - alpha) * QValue + alpha * (reward);
+        //Debug.Log("newQValue" + QValue);
+        //float newQValue = (1 - alpha) * oldQValue + alpha * (reward + gamma * maxNewQValue);
 
-        // Attribute for moves that are possible but not desired according to the strategy
-        public float unwantedMoves;
+    }
 
-        // Method to reset all attributes to zero
-        public void Reset()
+    public void ApplyLearnedQValueToAllNodes(float reward, float parentRewardRatio)
+    {
+        Learn(reward);
+        // Apply the learned Q-value to this node
+
+        // Apply a portion of the Q-value to each parent node
+        reward /= parentRewardRatio; // Divide Q-value for each level up
+
+        // Get the parent node
+        QTreeNode parentNode = Parent;
+
+        // Propagate the Q-value to each parent node
+        while (parentNode != null)
         {
-            impossibleMoves = 0.0f;
-            unwantedMoves = 0.0f;
+            parentNode.ApplyLearnedQValueToAllNodes(reward, parentRewardRatio);
+            parentNode = parentNode.Parent;
+            //reward /= parentRewardRatio; // Divide the portion for each level up
         }
+    }
+
+    public List<QTreeNode> GetParentsUntilRoot()
+    {
+        List<QTreeNode> parents = new List<QTreeNode>();
+        QTreeNode current = this.Parent;
+
+        while (current != null)
+        {
+            parents.Add(current);
+            current = current.Parent;
+        }
+
+        return parents;
+    }
+
+}
+public class QTree
+{
+    private QTreeNode root;
+    public float epsilon = 0.1f;
+    private float epsilonDecayRate = .98f;
+    public float minEpsilon = 0.05f;
+
+    public QTree(Vector3Int rootPosition)
+    {
+        root = new QTreeNode(rootPosition);
+    }
+
+    public QTreeNode GetRoot()
+    {
+        return root;
+    }
+
+    public void DecayEpsilon()
+    {
+        epsilon = Mathf.Max(minEpsilon, epsilon * epsilonDecayRate);
+    }
+
 }
 
 
+public class QTreePrinter
+{
+    // Method to print all trees to a JSON file
+    public void PrintAllTreesToJsonFile(List<QTree> qTreeList, string filePath)
+    {
+        // Ensure directory exists
+        string directoryPath = Path.GetDirectoryName(filePath);
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
+
+        // Create a list to store serialized JSON strings for each tree
+        List<string> jsonList = new List<string>();
+
+        // Serialize root nodes and their trees to JSON separately
+        foreach (var tree in qTreeList)
+        {
+            var root = tree.GetRoot();
+            var rootNodeDto = ConvertToDto(root);
+            var json = JsonUtility.ToJson(rootNodeDto, true);
+            jsonList.Add(json);
+        }
+
+        // Write all JSON strings to the file
+        File.WriteAllLines(filePath, jsonList);
+        Debug.Log("Trees have been serialized to JSON file.");
+    }
 
 
+    // Convert QTreeNode to DTO
+    private QTreeNodeDto ConvertToDto(QTreeNode node)
+    {
+        var dto = new QTreeNodeDto();
+        dto.State = node.State;
+        dto.QValue = node.QValue;
 
+        // Set the parent state if available
+        dto.ParentState = node.Parent != null ? node.Parent.State : Vector3Int.zero;
 
+        dto.Children = new List<QTreeNodeDto>();
+        foreach (var child in node.Children)
+        {
+            dto.Children.Add(ConvertToDto(child));
+        }
 
+        return dto;
+    }
+
+}
+
+// DTO class for QTreeNode
+[System.Serializable]
+public class QTreeNodeDto
+{
+    public Vector3Int State;
+    public float QValue;
+    public Vector3Int ParentState; // Added property for parent state
+    public List<QTreeNodeDto> Children;
+}
 
 
 

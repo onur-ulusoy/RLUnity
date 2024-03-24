@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.IO;
+using System.Linq;
 
 public class SimController : MonoBehaviour
 {
@@ -223,67 +225,125 @@ public class SimController : MonoBehaviour
 
     //public int localStop = 0;
     Dictionary<Vector3Int, string> indexToOldBlockDirection = new Dictionary<Vector3Int, string>();
+    List<List<QTreeNode>> chainList = new List<List<QTreeNode>>();
+
     public bool PickAndMoveCubeAnim(Vector3Int cubePosition)
     {
+        if (qla == null && GameObject.FindGameObjectWithTag("la") != null)
+            qla = GameObject.FindGameObjectWithTag("la").GetComponent<QLearningAgent>();
+
         // List of directions
         string[] directions = { "left", "right", "front", "back" };
+        float epsilon = 0.1f;
+        // Find the node with cubePosition in any tree
+        QTreeNode node = null;
+        QTree qTree = null;
+        foreach (var tree in qla.qTreeList)
+        {
+            node = FindNode(tree.GetRoot(), cubePosition);
+            if (node != null)
+            {
+                qTree = tree;
+                break;
+            }
+        }
+        if (node == null) print("nulll"+cubePosition.ToString());
+
+        bool hasChildren = node.Children.Count > 0;
 
         // Initialize targetPosition
-        Vector3Int targetPosition;
-        string direction;
-        // Check if the target position is within the structure boundaries
-        do
+        Vector3Int targetPosition = Vector3Int.zero;
+        string direction = "";
+        if (Random.Range(0f, 0.4f) < epsilon || !hasChildren)
         {
-            // Randomly select a direction
-
-            // Check if cubePosition exists in indexToOldBlockDirection
-            if (indexToOldBlockDirection.ContainsKey(cubePosition))
+            print("yyyrandom");
+            // Check if the target position is within the structure boundaries
+            do
             {
-                foreach (var kvp in indexToOldBlockDirection)
+                // Randomly select a direction
+
+                // Check if cubePosition exists in indexToOldBlockDirection
+                if (indexToOldBlockDirection.ContainsKey(cubePosition))
                 {
-                    Debug.Log("Key: " + kvp.Key + ", Value: " + kvp.Value);
+                    foreach (var kvp in indexToOldBlockDirection)
+                    {
+                        Debug.Log("Key: " + kvp.Key + ", Value: " + kvp.Value);
+                    }
+
+                    // Retrieve the direction associated with cubePosition
+                    direction = indexToOldBlockDirection[cubePosition];
+
+                    // Remove the element from the dictionary
+                    indexToOldBlockDirection.Remove(cubePosition);
+
+                    // Now you can use the direction variable as needed
                 }
+                else
+                    direction = directions[Random.Range(0, directions.Length)];
 
-                // Retrieve the direction associated with cubePosition
-                direction = indexToOldBlockDirection[cubePosition];
+                // Initialize targetPosition with cubePosition for each iteration
+                targetPosition = cubePosition;
 
-                // Remove the element from the dictionary
-                indexToOldBlockDirection.Remove(cubePosition);
-
-                // Now you can use the direction variable as needed
+                // Modify targetPosition based on the selected direction
+                switch (direction.ToLower())
+                {
+                    case "left": targetPosition.x -= 1; break;
+                    case "right": targetPosition.x += 1; break;
+                    case "front": targetPosition.z += 1; break;
+                    case "back": targetPosition.z -= 1; break;
+                }
             }
-            else
-            direction = directions[Random.Range(0, directions.Length)];
+            while (targetPosition.x < 0 || targetPosition.x >= structureSize.x ||
+                     targetPosition.z < 0 || targetPosition.z >= structureSize.z ||
+                     upperBoxPoses.Contains(targetPosition));
 
-            // Initialize targetPosition with cubePosition for each iteration
-            targetPosition = cubePosition;
-
-            // Modify targetPosition based on the selected direction
-            switch (direction.ToLower())
+            if (RegisterUpperBoxesInner(targetPosition) || RegisterUpperBoxesInner(cubePosition))
             {
-                case "left": targetPosition.x -= 1; break;
-                case "right": targetPosition.x += 1; break;
-                case "front": targetPosition.z += 1; break;
-                case "back": targetPosition.z -= 1; break;
+                //print("error!");
+
+                print("**"+cubePosition.ToString()+targetPosition.ToString());
+
+                AddChildToNode(cubePosition, tempUpperY);
+                print("**3" + cubePosition.ToString() + tempUpperY.ToString());
+                tempUpperY = Vector3Int.zero;
+
+                indexToOldBlockDirection.Add(cubePosition, direction);
+                AddChildToNode(cubePosition, targetPosition);
+
+                return false;
             }
         }
-        while (targetPosition.x < 0 || targetPosition.x >= structureSize.x ||
-                 targetPosition.z < 0 || targetPosition.z >= structureSize.z ||
-                 upperBoxPoses.Contains(targetPosition));
 
-        if (RegisterUpperBoxesInner(targetPosition) || RegisterUpperBoxesInner(cubePosition))
+        else
         {
-            indexToOldBlockDirection.Add(cubePosition, direction);
-            return false;
+            print("yyyExploit");
+            // Find the child with the highest QValue
+            QTreeNode childWithHighestQValue = node.Children.OrderByDescending(child => child.QValue).First();
+            targetPosition = childWithHighestQValue.State;
+            //print("**********t:" + targetPosition.ToString());
+            direction = FindDirection(cubePosition, targetPosition);
+
         }
+
         print("fromm:" + cubePosition.ToString());
         print("targett:" + targetPosition.ToString());
         print("\n");
 
-        if (qla == null && GameObject.FindGameObjectWithTag("la") != null)
-            qla = GameObject.FindGameObjectWithTag("la").GetComponent<QLearningAgent>();
+
 
         //ClearUpperBox(targetPosition);
+        QTreeNode childNode = AddChildToNode(cubePosition, targetPosition);
+
+        // Assuming childNode is a QTreeNode instance
+        List<QTreeNode> chain = childNode.GetParentsUntilRoot();
+        chain.Add(childNode);
+
+        if (!IsChainInList(chain))
+        {
+            chainList.Add(chain);
+            childNode.ApplyLearnedQValueToAllNodes(-0.01f,1.5f);
+
+        }
 
         // Call the MoveCube function
         if (!MoveCube(cubePosition, direction))
@@ -299,6 +359,9 @@ public class SimController : MonoBehaviour
 
         else
         {
+            epsilon = qTree.epsilon;
+            qTree.DecayEpsilon();
+            print("yyy" + qTree.epsilon);
             //localStop++;
             //pickAndMove = Vector3Int.zero;
             downwardQueue.Add(targetPosition);
@@ -307,6 +370,129 @@ public class SimController : MonoBehaviour
         }
 
         //print("return");
+    }
+
+    public bool IsChainInList(List<QTreeNode> targetChain)
+    {
+        foreach (var chain in chainList)
+        {
+            if (chain.SequenceEqual(targetChain))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // AddChild() TODO add tree related methods to tree classes and change their names
+    public QTreeNode AddChildToNode(Vector3Int cubePosition, Vector3Int targetPosition)
+    {
+        if (qla == null && GameObject.FindGameObjectWithTag("la") != null)
+            qla = GameObject.FindGameObjectWithTag("la").GetComponent<QLearningAgent>();
+
+        // Find the node with cubePosition in any tree
+        QTreeNode node = null;
+        foreach (var tree in qla.qTreeList)
+        {
+            node = FindNode(tree.GetRoot(), cubePosition);
+            if (node != null)
+            {
+                break;
+            }
+        }
+
+        if (node != null)
+        {
+            QTreeNode childNode;
+            // Check if targetPosition is already a child of cubePosition
+            if ((childNode = IsChildOfNode(node, targetPosition)) != null)
+            {
+                Debug.LogWarning("targetPosition is already a child of cubePosition.");
+                return childNode;
+            }
+            // Create child if it does not exist
+
+            // Create a new node for targetPosition
+            childNode = new QTreeNode(targetPosition);
+
+            // Add the new node as a child of the found node
+            node.AddChild(childNode);
+            childNode.Parent = node;
+            return childNode;
+        }
+        else
+        {
+            Debug.LogError("Node with cubePosition not found in any tree.");
+            return null;
+        }
+    }
+
+    // Helper method to check if a node with state exists in the children of a given node
+    private QTreeNode IsChildOfNode(QTreeNode currentNode, Vector3Int state)
+    {
+        foreach (var childNode in currentNode.Children)
+        {
+            if (childNode.State == state)
+            {
+                return childNode;
+            }
+        }
+        return null;
+    }
+
+
+    // Helper method to recursively find a node with a specific state in the tree
+    private QTreeNode FindNode(QTreeNode currentNode, Vector3Int state)
+    {
+        if (currentNode.State == state)
+        {
+            return currentNode;
+        }
+
+        foreach (QTreeNode childNode in currentNode.Children)
+        {
+            QTreeNode foundNode = FindNode(childNode, state);
+            if (foundNode != null)
+            {
+                return foundNode;
+            }
+        }
+
+        return null;
+    }
+
+    // Finds the direction in x-z 2D plane
+    string FindDirection(Vector3Int cubePosition, Vector3Int targetPosition)
+    {
+        // Calculate the direction based on the difference between cubePosition and targetPosition
+        int deltaX = targetPosition.x - cubePosition.x;
+        int deltaZ = targetPosition.z - cubePosition.z;
+
+        // Check which axis has the greater difference to determine the direction
+        if (Mathf.Abs(deltaX) > Mathf.Abs(deltaZ))
+        {
+            // Move along the x-axis
+            if (deltaX > 0)
+            {
+                return "right";
+            }
+            else
+            {
+                return "left";
+            }
+        }
+        else
+        {
+            // Move along the z-axis
+            if (deltaZ > 0)
+            {
+                return "front";
+            }
+            else
+            {
+                return "back";
+            }
+        }
     }
 
 
@@ -412,6 +598,7 @@ public class SimController : MonoBehaviour
         //totalUpperBoxes = 0;
         upperBoxPoses.Clear();
         downwardQueue.Clear();
+        chainList.Clear();
         indexToOldBlockDirection.Clear();
         positionToCubeMap.Clear();
         positionToEmptyMap.Clear();
@@ -429,20 +616,30 @@ public class SimController : MonoBehaviour
     public void RegisterUpperBoxes(Vector3Int cubePosition)
     {
         print("inside ClearUpperBoxes");
-
+        if (qla == null && GameObject.FindGameObjectWithTag("la") != null)
+            qla = GameObject.FindGameObjectWithTag("la").GetComponent<QLearningAgent>();
         for (int y = cubePosition.y + 1; y < structureSize.y ; y++)
         {
             var upperYPos = new Vector3Int(cubePosition.x, y, cubePosition.z);
             if (positionToCubeMap.ContainsKey(upperYPos))
             {
                 upperBoxPoses.Add(upperYPos);
+
+                // Check if any item in qla.qTreeList has the same root position as upperYPos
+                if (!qla.qTreeList.Any(item => item.GetRoot().State.Equals(upperYPos)))
+                {
+                    // If no item with the same root position is found, add a new QTree object with the specified upperYPos to the list
+                    qla.qTreeList.Add(new QTree(upperYPos));
+                }
+
             }
         }
-        if(upperBoxPoses.Count > 0)
+        foreach (QTree tree in qla.qTreeList)
         {
-            if (qla == null && GameObject.FindGameObjectWithTag("la") != null)
-                qla = GameObject.FindGameObjectWithTag("la").GetComponent<QLearningAgent>();
-
+            Debug.Log("Root position of tree: " + tree.GetRoot().State);
+        }
+        if (upperBoxPoses.Count > 0)
+        {
             qla.stop = true;
             print("stop qlearning!");
             qla.exit = true;
@@ -451,7 +648,7 @@ public class SimController : MonoBehaviour
         print("total upper boxes:" + upperBoxPoses.Count);
         //upperBoxIndex = upperBoxPoses.Count - 1;
     }
-
+    public Vector3Int tempUpperY;
     public bool RegisterUpperBoxesInner(Vector3Int cubePosition)
     {
         print("inside ClearUpperBoxes");
@@ -462,6 +659,7 @@ public class SimController : MonoBehaviour
             if (positionToCubeMap.ContainsKey(upperYPos))
             {
                 upperBoxPoses.Add(upperYPos);
+                tempUpperY = upperYPos;
                 return true;
             }
         }
@@ -518,6 +716,7 @@ public class SimController : MonoBehaviour
             else if (upperBoxPoses.Count > 0)
             {
                 int index = upperBoxPoses.Count - 1;
+                print("merhaba");
                 bool retv = PickAndMoveCubeAnim(upperBoxPoses[index]);
 
                 if (retv)
@@ -536,49 +735,54 @@ public class SimController : MonoBehaviour
             else if (qla != null)
                 qla.stop = false;
 
-
+            if (qla != null)
+            {
+                QTreePrinter qTreePrinter = new QTreePrinter();
+                qTreePrinter.PrintAllTreesToJsonFile(qla.qTreeList, Application.dataPath + "/QTables/trees/all_trees.json");
+                //print("error!1");
+            }
+            //print("timer reset");
             timer1 = 0f; // Reset the timer
-            
-            
-        }
-
-        
-/*        if (pickAndMove != Vector3Int.zero)
-        {
-            timer1 += Time.deltaTime;
-
-            if (timer1 >= animationDuration)
-            {
-                print("pickandmoveAnim");
-                PickAndMoveCubeAnim(pickAndMove);
-                timer1 = 0f; // Reset the timer
-            }
-
-        }
-        if(upperBoxIndex >= 0)
-        {
-            print("upperBoxIndex:" + upperBoxIndex);
-
-            ClearUpperBox();
-            upperBoxIndex--;
-            if (upperBoxIndex == -1) upperBoxPoses.Clear();
 
         }
 
-        if (localStop == totalUpperBoxes)
-        {
-            timer2 += Time.deltaTime;
 
-            if (timer2 >= animationDuration)
-            {
+        /*        if (pickAndMove != Vector3Int.zero)
+                {
+                    timer1 += Time.deltaTime;
 
-                print("localstop");
-                qla.stop = false;
-                localStop = totalUpperBoxes = 0;
-                timer2 = 0f; // Reset the timer
-            }
-            
-        }*/
+                    if (timer1 >= animationDuration)
+                    {
+                        print("pickandmoveAnim");
+                        PickAndMoveCubeAnim(pickAndMove);
+                        timer1 = 0f; // Reset the timer
+                    }
+
+                }
+                if(upperBoxIndex >= 0)
+                {
+                    print("upperBoxIndex:" + upperBoxIndex);
+
+                    ClearUpperBox();
+                    upperBoxIndex--;
+                    if (upperBoxIndex == -1) upperBoxPoses.Clear();
+
+                }
+
+                if (localStop == totalUpperBoxes)
+                {
+                    timer2 += Time.deltaTime;
+
+                    if (timer2 >= animationDuration)
+                    {
+
+                        print("localstop");
+                        qla.stop = false;
+                        localStop = totalUpperBoxes = 0;
+                        timer2 = 0f; // Reset the timer
+                    }
+
+                }*/
 
     }
 
