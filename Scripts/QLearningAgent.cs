@@ -312,7 +312,7 @@ public class QLearningAgent : MonoBehaviour
             stateHistory.Dequeue();
         }
 
-        // Penalize downward movement when the agent reaches the target column
+        // Penalize movement other than downwards when the agent reaches the target column
         if (currentState.x == initialPosition.x && currentState.z == initialPosition.z
            && (state.x != initialPosition.x || state.z != initialPosition.z))
         {
