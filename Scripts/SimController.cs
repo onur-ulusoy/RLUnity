@@ -23,7 +23,9 @@ public class SimController : MonoBehaviour
     
     public GameObject cubesParent;
     public QLearningAgent qla;
+    public float intervalFloat;
 
+    public bool initAgents = true;
     // Method to initialize the prismatic structure
     public void InitPrismaticStructure(int a, int b, int c)
     {
@@ -46,6 +48,7 @@ public class SimController : MonoBehaviour
 
         Vector3 cubeSize = cubeRenderer.bounds.size;
         Vector3 interval = cubeSize + new Vector3(tolerance, tolerance, tolerance);
+        intervalFloat = interval.x;
 
         // Instantiate the cubes and set them as children of cubesParent
         for (int x = 0; x < a; x++)
@@ -81,7 +84,66 @@ public class SimController : MonoBehaviour
         // Take snapshots after initialization
         initialPositionToCubeMap = new Dictionary<Vector3Int, GameObject>(positionToCubeMap);
         initialPositionToEmptyMap = new Dictionary<Vector3Int, GameObject>(positionToEmptyMap);
+
+        // Initialize agents after the cubes are set up
+        if (initAgents) InitializeAgents(a, b, interval);
+
     }
+    public bool randomize = true;
+    public GameObject agentPrefab;
+
+    // Method to initialize agents above the prismatic structure
+    private void InitializeAgents(int a, int b, Vector3 interval)
+    {
+        int edgeSize = a / 4; // Calculate edge size of each flat box
+        float agentHeight = 0.1f; // Height of the agent's box (y scale)
+        float cubeHeight = interval.y;
+        float yPos = (b * cubeHeight) + 0.3f; // Position above the highest cube layer
+        GameObject agentContainer = new GameObject("AgentContainer");
+
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                Vector3 position = new Vector3((i * edgeSize + edgeSize / 2) * interval.x, yPos, (j * edgeSize + edgeSize / 2) * interval.z);
+
+                // Determine whether to generate an agent based on the randomize setting
+                bool shouldGenerate = !randomize || Random.Range(0, 3) == 0; // Always generate if not randomizing, otherwise 1/3 chance
+
+                if (shouldGenerate)
+                {
+                    GameObject agentBox = Instantiate(agentPrefab, position, Quaternion.identity, agentContainer.transform);
+                    agentBox.transform.localScale = new Vector3(edgeSize * interval.x, agentHeight, edgeSize * interval.z);
+
+                    Renderer renderer = agentBox.GetComponent<Renderer>();
+                    if (renderer != null)
+                    {
+                        renderer.material = CreateTransparentMaterial();
+                    }
+
+                    agents.Add(new Agent(agentBox));
+                }
+            }
+        }
+    }
+
+    private Material CreateTransparentMaterial()
+    {
+        Material material = new Material(Shader.Find("Standard"));
+        material.SetFloat("_Mode", 3);  // Set to transparent mode
+        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        material.SetInt("_ZWrite", 0);
+        material.DisableKeyword("_ALPHATEST_ON");
+        material.EnableKeyword("_ALPHABLEND_ON");
+        material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        material.renderQueue = 3000;
+        material.color = new Color(Random.value, Random.value, Random.value, 0.3f); // Random color and half transparent
+
+        return material;
+    }
+
+    public List<Agent> agents = new List<Agent>();
 
     // Reset method
     public void ResetPosition()
@@ -100,6 +162,19 @@ public class SimController : MonoBehaviour
             pair.Value.transform.position = ConvertKeyToPosition(pair.Key);
         }
     }
+
+    public void ResetAllMaterials()
+    {
+        foreach (KeyValuePair<Vector3Int, GameObject> entry in positionToCubeMap)
+        {
+            Renderer cubeRenderer = entry.Value.GetComponent<Renderer>();
+            if (cubeRenderer != null)
+            {
+                cubeRenderer.material = material1;  // Assuming material1 is your "normal" material
+            }
+        }
+    }
+
 
     private Vector3 ConvertKeyToPosition(Vector3Int key)
     {
@@ -170,7 +245,8 @@ public class SimController : MonoBehaviour
         return true;
     }
     public int movect = 0;
-    //public Vector3Int pickAndMove = Vector3Int.zero;
+
+    //DEPRECATED
     public bool PickAndMoveCube(Vector3Int cubePosition)
     {
         // List of directions
@@ -497,10 +573,11 @@ public class SimController : MonoBehaviour
 
 
     public float animationDuration = 1.0f; // Duration of the slide in seconds
-
+    public bool animationEnabled = false;
     // Coroutine for sliding animation
     private IEnumerator SlideObjects(GameObject cube, GameObject empty, Vector3Int cubePosition, Vector3Int targetPosition)
     {
+        animationEnabled = true;
         // Update the dictionaries
         positionToCubeMap.Remove(cubePosition);
         positionToEmptyMap.Remove(targetPosition);
@@ -531,6 +608,8 @@ public class SimController : MonoBehaviour
             cube.transform.position = startPositionEmpty;
             empty.transform.position = startPositionCube;
         }
+        animationEnabled = false;
+
     }
 
     public Material material1; 
@@ -787,4 +866,17 @@ public class SimController : MonoBehaviour
     }
 
 
+}
+
+// Definition of the Agent class
+public class Agent
+{
+    public GameObject visualization;
+    public bool currentMovement;
+    public bool available = true;
+
+    public Agent(GameObject visual)
+    {
+        visualization = visual;
+    }
 }
