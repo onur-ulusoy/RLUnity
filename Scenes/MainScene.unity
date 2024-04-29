@@ -7844,8 +7844,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simController: {fileID: 1355416146}
   agentLock: 0
-  maxClosestAgents: 1
-  agentSpeed: 1
+  maxClosestAgents: 2
+  agentSpeed: 2
 --- !u!4 &1788195594
 Transform:
   m_ObjectHideFlags: 0

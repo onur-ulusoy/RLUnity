@@ -16,6 +16,8 @@ public class SimController : MonoBehaviour
 
     public Dictionary<Vector3Int, GameObject> positionToCubeMap = new Dictionary<Vector3Int, GameObject>();
     public Dictionary<Vector3Int, GameObject> positionToEmptyMap = new Dictionary<Vector3Int, GameObject>();
+    public Dictionary<Vector3Int, GameObject> positionToAllMap = new Dictionary<Vector3Int, GameObject>();
+
 
     // Snapshots of the initial states
     private Dictionary<Vector3Int, GameObject> initialPositionToCubeMap;
@@ -69,11 +71,15 @@ public class SimController : MonoBehaviour
                     {
                         newCube = Instantiate(emptyPrefab, position, Quaternion.identity);
                         positionToEmptyMap.Add(positionKey, newCube);
+                        positionToAllMap.Add(positionKey, newCube);
+
                     }
                     else
                     {
                         newCube = Instantiate(cubePrefab, position, Quaternion.identity);
                         positionToCubeMap.Add(positionKey, newCube);
+                        positionToAllMap.Add(positionKey, newCube);
+
                     }
 
                     newCube.transform.parent = cubesParent.transform; // Set the parent of the new cube
@@ -106,8 +112,6 @@ public class SimController : MonoBehaviour
             for (int j = 0; j < 4; j++)
             {
                 Vector3 position = new Vector3((i * edgeSize + edgeSize / 2) * interval.x, yPos, (j * edgeSize + edgeSize / 2) * interval.z);
-
-                // Determine whether to generate an agent based on the randomize setting
                 bool shouldGenerate = !randomize || Random.Range(0, 3) == 0; // Always generate if not randomizing, otherwise 1/3 chance
 
                 if (shouldGenerate)
@@ -121,8 +125,21 @@ public class SimController : MonoBehaviour
                         renderer.material = CreateTransparentMaterial();
                     }
 
-                    agents.Add(new Agent(agentBox));
+                    Agent newAgent = new Agent(agentBox);
+                    agents.Add(newAgent);
+                    newAgent.initialPosition = position;  // Explicitly store the initial position
                 }
+            }
+        }
+    }
+
+    public void ResetAgentPositions()
+    {
+        foreach (var agent in agents)
+        {
+            if (agent.visualization != null)
+            {
+                agent.visualization.transform.position = agent.initialPosition;  // Reset position to the initial one
             }
         }
     }
@@ -198,22 +215,8 @@ public class SimController : MonoBehaviour
     }
 
 
-    // Method to move a cube in a specified direction
-    public bool MoveCube(Vector3Int cubePosition, string direction)
+    public Vector3Int FindTarget(Vector3Int cubePosition, string direction)
     {
-        if (qla == null && GameObject.FindGameObjectWithTag("la") != null)
-            qla = GameObject.FindGameObjectWithTag("la").GetComponent<QLearningAgent>();
-
-        print(1);
-        if (!positionToCubeMap.ContainsKey(cubePosition))
-        {
-            Debug.LogError("No cube found at the specified position.");
-            print(cubePosition.ToString());
-            return false;
-        }
-        print(2);
-
-
         Vector3Int targetPosition = cubePosition;
         switch (direction.ToLower())
         {
@@ -223,27 +226,41 @@ public class SimController : MonoBehaviour
             case "right": targetPosition.x += 1; break;
             case "front": targetPosition.z += 1; break;
             case "back": targetPosition.z -= 1; break;
-
-            default: Debug.LogError("Invalid direction specified."); return false;
         }
-        print(3);
+        return targetPosition;
+    }
+
+    public bool MoveCube(Vector3Int cubePosition, string direction)
+    {
+        if (qla == null && GameObject.FindGameObjectWithTag("la") != null)
+            qla = GameObject.FindGameObjectWithTag("la").GetComponent<QLearningAgent>();
+
+        if (!positionToCubeMap.ContainsKey(cubePosition))
+        {
+            Debug.LogError("No cube found at the specified position.");
+            print(cubePosition.ToString());
+            return false;
+        }
+
+        // Use the new FindTarget method to determine the target position
+        Vector3Int targetPosition = FindTarget(cubePosition, direction);
 
         if (positionToEmptyMap.ContainsKey(targetPosition))
         {
             GameObject cube = positionToCubeMap[cubePosition];
             GameObject empty = positionToEmptyMap[targetPosition];
-
             StartCoroutine(SlideObjects(cube, empty, cubePosition, targetPosition));
         }
-
         else
         {
-            Debug.LogError("The move is not possible. The target position is not empty or out of bounds."); return false;
+            Debug.LogError("The move is not possible. The target position is not empty or out of bounds.");
+            return false;
         }
-        print(4);
 
         return true;
     }
+
+
     public int movect = 0;
 
     //DEPRECATED
@@ -584,7 +601,7 @@ public class SimController : MonoBehaviour
 
         positionToCubeMap.Add(targetPosition, cube);
         positionToEmptyMap.Add(cubePosition, empty);
-
+        print("*changed" + positionToCubeMap[targetPosition].transform.position+" "+targetPosition+" "+cube.transform.position);
         float elapsed = 0;
 
         Vector3 startPositionCube = cube.transform.position;
@@ -874,6 +891,10 @@ public class Agent
     public GameObject visualization;
     public bool currentMovement;
     public bool available = true;
+    public bool available2 = false;
+    public Vector3 initialPosition;
+
+    public float distanceToBox;
 
     public Agent(GameObject visual)
     {

@@ -1,0 +1,14 @@
+import numpy as np
+
+# Define matrix A
+A = np.array([[2, 0, 0],
+              [0, 1, 4],
+              [0, -2, -3]])
+
+# Calculate eigenvalues and eigenvectors
+eigenvalues, eigenvectors = np.linalg.eig(A)
+
+# eigenvalues will contain the eigenvalues
+# eigenvectors will be a matrix with each column being an eigenvector corresponding to the eigenvalue at the same index
+print(eigenvalues)
+print(eigenvectors)

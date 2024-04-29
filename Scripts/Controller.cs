@@ -1,14 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Controller : MonoBehaviour
 {
     public SimController simController;
     private Vector3Int selectedCubePosition = Vector3Int.zero;
+    Dictionary<GameObject, Agent> agentLookup = new Dictionary<GameObject, Agent>();
 
     void Start()
     {
+
+        foreach (var agent in simController.agents)
+        {
+            agentLookup[agent.visualization] = agent;
+        }
+
     }
 
     void Update()
@@ -36,12 +44,28 @@ public class Controller : MonoBehaviour
                     Vector3Int emptyPosition = FindPositionInMap(simController.positionToEmptyMap, hit.collider.gameObject);
                     if (emptyPosition != Vector3Int.zero && selectedCubePosition != Vector3Int.zero)
                     {
+
                         string direction = GetDirection(selectedCubePosition, emptyPosition);
+                        Vector3Int targetPos = simController.FindTarget(selectedCubePosition, direction);
+                        StartCoroutine(DelayedMoveAgentAboveBox(targetPos));
+                        print("selected:"+selectedCubePosition+"target:"+ targetPos+ direction);
                         simController.MoveCube(selectedCubePosition, direction);
                         UpdatePosition(direction);
+                        SetDistancesToBox(selectedCubePosition);
 
                     }
                 }
+
+                else if (hit.collider.gameObject.CompareTag("agentController"))
+                {
+                    GameObject agentVis = hit.collider.gameObject.transform.parent.gameObject;
+                    if (agentLookup.TryGetValue(agentVis, out Agent agent))
+                    {
+                        agent.available2 = !agent.available2;
+                        Debug.Log($"Agent available status toggled to {agent.available2}");
+                    }
+                }
+
             }
         }
         if (selectedCubePosition != Vector3Int.zero)
@@ -75,6 +99,7 @@ public class Controller : MonoBehaviour
                 {
                     SetAgentOpacity(agent, 0.3f);
                     agent.available = true;
+                    //agent.available2 = true;
 
                 }
             }
@@ -86,6 +111,7 @@ public class Controller : MonoBehaviour
             //simController.SwitchCubeMaterialAt(selectedCubePosition, "normal");
             //selectedCubePosition = Vector3Int.zero;
             simController.ResetPosition();
+            simController.ResetAgentPositions();
 
             foreach (var agent in simController.agents)
             {
@@ -93,6 +119,8 @@ public class Controller : MonoBehaviour
                 StopAgentMovement(agent);
                 SetAgentOpacity(agent, 0.3f);
                 agent.available = true;
+                //agent.available2 = true;
+
 
 
             }
@@ -105,6 +133,7 @@ public class Controller : MonoBehaviour
                 StopAgentMovement(agent);
                 SetAgentOpacity(agent, 0.3f);
                 agent.available = true;
+                //agent.available2 = true;
 
             }
         }
@@ -142,15 +171,16 @@ public class Controller : MonoBehaviour
         Vector3 cubeWorldPosition = simController.positionToCubeMap[cubePosition].transform.position;
         List<Agent> closestAgents = new List<Agent>();
         int agentsAbove = 0;
+        int unavailableAgents = 0;
 
-        // Iterate through all agents to check if any are above and to collect their distances
-        foreach (var agent in simController.agents)
+        // Iterate over agents sorted by distance to the box
+        foreach (var agent in simController.agents.OrderBy(agent => agent.distanceToBox))
         {
             Vector3 agentPosition = agent.visualization.transform.position;
             if (IsAgentAbove(cubeWorldPosition, agentPosition, agent.visualization.transform.localScale.x))
             {
                 agentsAbove++;
-                if (simController.animationEnabled && agent.available && !agentLock)
+                if (simController.animationEnabled && agent.available && !agentLock && agent.available2)
                 {
                     SetAgentOpacity(agent, 0.8f);
                     agent.available = false;
@@ -175,10 +205,17 @@ public class Controller : MonoBehaviour
 
                 SetAgentOpacity(agent, 0.3f);
             }
+
+            if (!agent.available2)
+            {
+                unavailableAgents++;
+            }
         }
 
         // If there are agents above, adjust maxClosestAgents accordingly
-        int agentsToMove = (int)Mathf.Max(0, maxClosestAgents - agentsAbove);
+        int agentsToMove = (int)Mathf.Max(0, maxClosestAgents - (agentsAbove-unavailableAgents));
+        //print(maxClosestAgents+ " " + unavailableAgents);
+        //print(agentsToMove);
 
         if (agentsToMove > 0)
         {
@@ -188,10 +225,12 @@ public class Controller : MonoBehaviour
             {
                 Agent agentToMove = closestAgents[i];
 
+                if (!agentToMove.available2)
+                    continue;
 
                 Vector3 targetPosition = ConstrainPositionWithinBounds(cubeWorldPosition, simController.structureSize, agentToMove.visualization.transform.localScale.x);
                 agentToMove.currentMovement = true;
-                simController.SwitchCubeMaterialAt(selectedCubePosition, "selected");
+                //simController.SwitchCubeMaterialAt(selectedCubePosition, "selected");
 
                 selectedCubePosition = Vector3Int.zero;
                 print("..:");
@@ -319,7 +358,7 @@ public class Controller : MonoBehaviour
     IEnumerator DelayedMoveAgentAboveBox(Vector3Int boxPosition)
     {
         // Wait for the specified animation duration before moving the agent
-        yield return new WaitForSeconds(simController.animationDuration);
+        yield return new WaitForSeconds(0.01f);
 
         // Now move the closest agent above the box
         MoveClosestAgentAboveBox(boxPosition);
@@ -331,12 +370,16 @@ public class Controller : MonoBehaviour
         if (Input.GetKeyDown(key))
         {
             Vector3Int previousPosition = selectedCubePosition;
+
+            Vector3Int targetPos = simController.FindTarget(selectedCubePosition, direction);
+            StartCoroutine(DelayedMoveAgentAboveBox(targetPos));
+
             if (simController.MoveCube(selectedCubePosition, direction))
             {
                 UpdatePosition(direction);
 
                 print("*0." + selectedCubePosition);
-                StartCoroutine(DelayedMoveAgentAboveBox(selectedCubePosition));
+                //StartCoroutine(DelayedMoveAgentAboveBox(selectedCubePosition));
 
                 Debug.Log("Moved " + direction + ". New position: " + selectedCubePosition);
             }
@@ -347,31 +390,50 @@ public class Controller : MonoBehaviour
             }
         }
     }
-
-    void MoveClosestAgentAboveBox(Vector3Int boxPosition)
+    void SetDistancesToBox(Vector3Int boxPosition)
     {
-        // Find the closest agent to the box
-        Agent closestAgent = null;
-        float minDistance = float.MaxValue;
+        Vector3 boxWorldPosition = simController.positionToCubeMap[boxPosition].transform.position;
 
         foreach (var agent in simController.agents)
         {
-            float distance = Vector3.Distance(agent.visualization.transform.position, simController.positionToCubeMap[boxPosition].transform.position);
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                closestAgent = agent;
-            }
+            // Calculate the distance from the agent to the box
+            agent.distanceToBox = Vector3.Distance(agent.visualization.transform.position, boxWorldPosition);
+            //print(agent.distanceToBox);
         }
+    }
+
+// Method to find the closest available agent to a given box position
+    Agent FindClosestAgent(Vector3Int boxPosition)
+    {
+        // First, update all distances to ensure they are current
+        SetDistancesToBox(boxPosition);
+
+        // Use LINQ to find the closest agent whose available2 flag is true
+        Agent closestAgent = simController.agents
+
+            // Comment out below to not filter availability
+
+            .Where(agent => agent.available2) // Filter to include only agents where available2 is true 
+            .OrderBy(agent => agent.distanceToBox) // Order by distance
+            .FirstOrDefault(); // Get the first agent that meets the criteria or null if none do
+
+        return closestAgent;
+    }
+
+    void MoveClosestAgentAboveBox(Vector3Int boxPosition)
+    {
+
+        Agent closestAgent = FindClosestAgent(boxPosition);
 
         if (closestAgent != null)
         {
             // Calculate the target position directly above the box
-            Vector3 boxWorldPosition = simController.positionToCubeMap[boxPosition].transform.position;
+            Vector3 boxWorldPosition = simController.positionToAllMap[boxPosition].transform.position;
+            print("*:" + boxPosition + " world"+ boxWorldPosition);
             Vector3 targetPosition = new Vector3(boxWorldPosition.x, closestAgent.visualization.transform.position.y, boxWorldPosition.z); // Adjust Y offset as needed
 
             selectedCubePosition = Vector3Int.zero;
-            print("*.*a"+closestAgent+" "+ targetPosition+" "+ boxPosition);
+            //print("*.*a"+closestAgent+" "+ targetPosition+" "+ boxPosition);
 
             // Start the coroutine to move the agent
             closestAgent.currentMovement = true;
